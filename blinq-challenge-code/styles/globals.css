@@ -14,3 +14,12 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.navbar-container {
+  width: 100vw;
+}
+
+.navbar-flex-container {
+  display: flex;
+  justify-content: center;
+}
