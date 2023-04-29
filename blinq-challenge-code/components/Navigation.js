@@ -14,7 +14,7 @@ export default function Navigation() {
   return (
     <Navbar bg="light" expand="lg" className='navbar-container'>
 
-      <Container className='navbar-flex-container'>
+      <Container>
 
         <Link href='/'>
             <Image
@@ -27,7 +27,7 @@ export default function Navigation() {
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Collapse id="basic-navbar-nav" className='justify-content-end'>
 
           <Nav className="ms-auto">
             <Nav.Link href="#home">Home</Nav.Link>
