@@ -1,9 +1,7 @@
-html,
-body {
+* {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: Inq,sans-serif;
 }
 
 a {
@@ -18,3 +16,25 @@ a {
 .navbar-container {
   width: 100vw;
 }
+
+.login-form {
+  margin-top: 4rem;
+  width: 60%vw;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login-title {
+  text-align: center;
+}
+
+
+
+.btn-primary {
+  background-color: #f35a57 !important;
+  border-color: #f35a57 !important;
+  width: 100%;
+  height: 3.5rem !important;
+}
+
