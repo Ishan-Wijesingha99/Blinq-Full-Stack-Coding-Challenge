@@ -14,7 +14,7 @@ a {
 }
 
 .navbar-container {
-  width: 100vw;
+  width: 100%
 }
 
 .login-form {
@@ -71,4 +71,28 @@ a {
   margin-top: 4rem;
 }
 
+.footer-container {
+  margin-top: 4rem;
+  padding: 2rem;
+  background-color: #272829;
+  width: 100%;
+  color: white
+}
 
+.footer-download-links {
+  
+}
+
+.rights-reserved {
+  text-align: center;
+}
+
+.social-media-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-footer-icon {
+  margin: 0.5rem;
+}

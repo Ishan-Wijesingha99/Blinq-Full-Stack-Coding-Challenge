@@ -11,7 +11,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <link rel="icon" href="/favicon.png" /> 
+        <link rel="icon" href="/favicon.png" />
+
       </Head>
 
       <AuthProvider>

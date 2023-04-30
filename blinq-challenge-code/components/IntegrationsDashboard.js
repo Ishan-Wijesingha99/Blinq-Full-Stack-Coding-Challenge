@@ -49,9 +49,9 @@ export default function IntegrationsDashboard() {
       {/* Zapier integration */}
       <div className='integration-container'>
         <Image
-        src={salesforceLogo}
+        src={zapierlogo}
         width={140}
-        height={100}
+        height={40}
         className='integration-logo'
         />
 
