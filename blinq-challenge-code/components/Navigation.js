@@ -20,12 +20,14 @@ export default function Navigation() {
       <Container>
 
         <Link href='/'>
-            <Image
+            <div className='navbar-logo-div'>
+              <Image
               src={navbarImage}
               alt='Company Logo'
               width={90}
               height={30}
-            />
+              />
+            </div>
         </Link>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -44,9 +46,9 @@ export default function Navigation() {
               :
               (
                 <>
-                <Nav.Link href="#home">Home</Nav.Link>
+                <Nav.Link href="/register">Register</Nav.Link>
 
-                <Nav.Link href="#link">Link</Nav.Link>
+                <Nav.Link href="/login">Log In</Nav.Link>
                 </>
               )
             }

@@ -17,6 +17,14 @@ a {
   width: 100%
 }
 
+.navbar-logo-div {
+  cursor: pointer;
+}
+
+.login-page-container, .register-page-container {
+  min-height: 70vh;
+}
+
 .login-form {
   margin-top: 4rem;
   width: 60%vw;

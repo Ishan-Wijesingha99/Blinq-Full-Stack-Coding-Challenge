@@ -32,63 +32,65 @@ export default function RegisterPage() {
 
   
   return (
-    <Form className='register-form'>
-      <h1 className='register-title'>Register</h1>
+    <div className='register-page-container'>
+      <Form className='register-form'>
+        <h1 className='register-title'>Register</h1>
 
-      <FloatingLabel
-        controlId="floatingInput"
-        label="Email address"
+        <FloatingLabel
+          controlId="floatingInput"
+          label="Email address"
+          className="my-4"
+        >
+
+          <Form.Control
+          type="email"
+          placeholder="name@example.com"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          />
+
+        </FloatingLabel>
+
+
+        <FloatingLabel
+        controlId="floatingPassword"
+        label="Password"
         className="my-4"
-      >
+        >
 
-        <Form.Control
-        type="email"
-        placeholder="name@example.com"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-        />
+          <Form.Control
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          />
 
-      </FloatingLabel>
+        </FloatingLabel>
 
+        <FloatingLabel
+        controlId="floatingPassword"
+        label="Confirm password"
+        className="my-4"
+        >
 
-      <FloatingLabel
-      controlId="floatingPassword"
-      label="Password"
-      className="my-4"
-      >
+          <Form.Control
+          type="password"
+          placeholder="Password"
+          value={confirmPassword}
+          onChange={e => setConfirmPassword(e.target.value)}
+          />
 
-        <Form.Control
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-        />
+        </FloatingLabel>
 
-      </FloatingLabel>
+        <Button
+        type="submit"
+        variant='primary'
+        onClick={submitHandler}
+        >
+          Register
+        </Button>
 
-      <FloatingLabel
-      controlId="floatingPassword"
-      label="Confirm password"
-      className="my-4"
-      >
-
-        <Form.Control
-        type="password"
-        placeholder="Password"
-        value={confirmPassword}
-        onChange={e => setConfirmPassword(e.target.value)}
-        />
-
-      </FloatingLabel>
-
-      <Button
-      type="submit"
-      variant='primary'
-      onClick={submitHandler}
-      >
-        Register
-      </Button>
-
-    </Form>
+      </Form>
+    </div>
   )
 }
