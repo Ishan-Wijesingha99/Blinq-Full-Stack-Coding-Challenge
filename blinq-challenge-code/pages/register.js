@@ -66,6 +66,7 @@ export default function RegisterPage() {
           className='register-form'
           onSubmit={handleSubmit(submitHandler)}
           >
+            
             <h1 className='register-title'>Register</h1>
 
             <FloatingLabel
@@ -129,6 +130,7 @@ export default function RegisterPage() {
             {errors.email && <p className='client-side-error'>- Email must be a valid email address</p>}
             {errors.pword && <p className='client-side-error'>- Password must be at least 6 characters</p>}
             {passwordsNotMatching && <p className='client-side-error'>- Password and Confirm Password field must be identical</p>}
+
           </Form>
         )
       }

@@ -7,23 +7,25 @@ import { useAuth } from '../context/AuthContext';
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+import { useForm } from 'react-hook-form';
+
 
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
 
   const { currentUser, login } = useAuth()
   console.log(currentUser)
 
   const router = useRouter()
 
+  const { register, handleSubmit, formState: { errors } } = useForm()
+
+
+
   const submitHandler = async event => {
-    event.preventDefault()
-
-    if(!email || !password) setError('Enter valid email and password')
-
+   
     try {
       // log them in
       await login(email, password)
@@ -32,7 +34,6 @@ export default function LoginPage() {
       router.push('/')
     } catch (error) {
       console.log(error)
-      setError('Incorrect email or password')
     }
   }
 
@@ -57,7 +58,11 @@ export default function LoginPage() {
         )
         :
         (
-          <Form className='login-form'>
+          <Form
+          className='login-form'
+          onSubmit={handleSubmit(submitHandler)}
+          >
+
             <h1 className='login-title'>Login</h1>
 
             <FloatingLabel
@@ -67,9 +72,12 @@ export default function LoginPage() {
             >
 
               <Form.Control
-              type="email"
+              type="text"
               placeholder="name@example.com"
-              value={email}
+              {...register("email", {
+                required: true,
+                pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+              })}
               onChange={e => setEmail(e.target.value)}
               />
 
@@ -85,7 +93,10 @@ export default function LoginPage() {
               <Form.Control
               type="password"
               placeholder="Password"
-              value={password}
+              {...register("pword", {
+                required: true,
+                minLength: 6
+              })}
               onChange={e => setPassword(e.target.value)}
               />
 
@@ -94,11 +105,12 @@ export default function LoginPage() {
             <Button
             type="submit"
             variant='primary'
-            onClick={submitHandler}
             >
-              Log in
+              Log In
             </Button>
 
+            {errors.email && <p className='client-side-error'>- Email must be a valid email address</p>}
+            {errors.pword && <p className='client-side-error'>- Password must be at least 6 characters</p>}
           </Form>
         )
       }
