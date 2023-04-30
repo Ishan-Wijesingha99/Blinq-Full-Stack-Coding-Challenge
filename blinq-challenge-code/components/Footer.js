@@ -6,22 +6,29 @@ import Image from 'next/image'
 import footerLogo from '../public/footer-logo.png'
 import Link from 'next/link'
 
+import { useRouter } from 'next/router'
+
 
 
 export default function Footer() {
+  const router = useRouter()
+
+  const goHome = () => router.push('/')
+
   return (
     <div className='footer-container'>
 
       <div className='footer-download-links'>
 
-        <div className='download-links-left'>
-          <Link href='/'>
-            <Image
-            src={footerLogo}
-            width={90}
-            height={27}
-            />
-          </Link>
+        <div
+        className='download-links-left'
+        onClick={goHome}
+        >
+          <Image
+          src={footerLogo}
+          width={90}
+          height={27}
+          />
         </div>
 
         <div className='download-links-right'>

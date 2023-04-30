@@ -22,7 +22,7 @@ a {
 }
 
 .login-page-container, .register-page-container {
-  min-height: 70vh;
+  min-height: 60vh;
 }
 
 .login-form {
@@ -134,7 +134,7 @@ a {
 }
 
 .footer-container {
-  margin-top: 4rem;
+  margin-top: 8rem;
   padding: 2rem;
   background-color: #272829;
   width: 100%;
