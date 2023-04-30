@@ -3,12 +3,17 @@ import Image from 'next/image'
 import salesforceLogo from '../public/salesforce-logo.png'
 import hubspotLogo from '../public/hubspot-logo.png'
 import zapierlogo from '../public/zapier-logo.png'
+import { useAuth } from '../context/AuthContext'
 
 
 
 export default function IntegrationsDashboard() {
+  const { currentUser } = useAuth()
+
   return (
     <div>
+
+      {currentUser && <p className='logged-in-message'>User is Logged In</p>}
 
       <h1 className='integrations-page-title'>Available Integrations</h1>
 

@@ -50,7 +50,14 @@ a {
   text-align: center;
 }
 
+.logged-in-message {
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 2rem;
+}
+
 .integration-container {
+  cursor: pointer;
   margin-top: 4rem;
   padding: 2rem;
   display: flex;
@@ -66,6 +73,11 @@ a {
   color: white;
 }
 
+.integration-container:hover {
+  transition: 300ms;
+  scale: 1.02;
+}
+
 .integrations-page-title {
   text-align: center;
   margin-top: 4rem;
@@ -79,12 +91,11 @@ a {
   color: white
 }
 
-.footer-download-links {
-  
-}
+
 
 .rights-reserved {
   text-align: center;
+  margin-bottom: 1.5rem;
 }
 
 .social-media-icons {
@@ -95,4 +106,39 @@ a {
 
 .social-footer-icon {
   margin: 0.5rem;
+}
+
+.social-footer-icon:hover {
+  cursor: pointer;
+}
+
+.footer-download-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.download-links-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.download-links-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.download-links-left:hover {
+  cursor: pointer;
+}
+
+.download-img-wrapper {
+  margin-left: 10px;
+}
+
+.download-img-wrapper:hover {
+  cursor: pointer;
 }
