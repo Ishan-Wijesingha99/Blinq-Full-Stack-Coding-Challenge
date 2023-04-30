@@ -95,6 +95,17 @@ a {
   margin-top: 2rem;
 }
 
+.client-side-error {
+  margin-top: 1rem;
+  color: #f35a57;
+  border: 2px solid #f35a57;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+}
+
+
+
+
 .integration-container {
   cursor: pointer;
   margin-top: 4rem;
