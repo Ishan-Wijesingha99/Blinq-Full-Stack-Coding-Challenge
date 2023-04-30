@@ -3,6 +3,7 @@ import '../styles/globals.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import type { AppProps } from 'next/app'
 import Layout from '../components/Layout'
+import { AuthProvider } from '../context/AuthContext'
 
 
 
@@ -13,9 +14,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.png" /> 
       </Head>
 
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <AuthProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </AuthProvider>
     </>
   )
 }

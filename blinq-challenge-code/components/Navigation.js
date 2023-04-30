@@ -8,9 +8,12 @@ import navbarImage from '../public/navbar-image.png'
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useAuth } from '../context/AuthContext';
 
 
 export default function Navigation() {
+  const { currentUser, logout } = useAuth()
+
   return (
     <Navbar bg="light" expand="lg" className='navbar-container'>
 
@@ -30,9 +33,23 @@ export default function Navigation() {
         <Navbar.Collapse id="basic-navbar-nav" className='justify-content-end'>
 
           <Nav className="ms-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
+            {
+              currentUser
+              ?
+              (
+                <>
+                  <Nav.Link onClick={logout}>Logout</Nav.Link>
+                </>
+              )
+              :
+              (
+                <>
+                <Nav.Link href="#home">Home</Nav.Link>
 
-            <Nav.Link href="#link">Link</Nav.Link>
+                <Nav.Link href="#link">Link</Nav.Link>
+                </>
+              )
+            }
           </Nav>
 
         </Navbar.Collapse>

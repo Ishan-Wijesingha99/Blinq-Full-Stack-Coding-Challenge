@@ -3,6 +3,7 @@ import { useState } from 'react'
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { useAuth } from '../context/AuthContext'
 
 
 
@@ -10,7 +11,24 @@ export default function RegisterPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  
+  const [error, setError] = useState('')
+
+  const { currentUser, signup } = useAuth()
+  console.log(currentUser)
+
+  const submitHandler = async event => {
+    event.preventDefault()
+
+    if(!email || !password) setError('Enter valid email and password')
+
+    try {
+      return await signup(email, password)      
+    } catch (error) {
+      console.log(error)
+      setError('Incorrect email or password')
+    }
+
+  }
 
   
   return (
@@ -66,6 +84,7 @@ export default function RegisterPage() {
       <Button
       type="submit"
       variant='primary'
+      onClick={submitHandler}
       >
         Register
       </Button>

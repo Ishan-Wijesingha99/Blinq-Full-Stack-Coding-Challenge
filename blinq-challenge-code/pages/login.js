@@ -3,13 +3,30 @@ import React from 'react'
 import { useState } from 'react'
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
+import { useAuth } from '../context/AuthContext';
 
 
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
 
+  const { currentUser, login } = useAuth()
+  console.log(currentUser)
+
+  const submitHandler = async event => {
+    event.preventDefault()
+
+    if(!email || !password) setError('Enter valid email and password')
+
+    try {
+      return await login(email, password)      
+    } catch (error) {
+      console.log(error)
+      setError('Incorrect email or password')
+    }
+  }
 
   
   return (
@@ -50,6 +67,7 @@ export default function LoginPage() {
       <Button
       type="submit"
       variant='primary'
+      onClick={submitHandler}
       >
         Log in
       </Button>

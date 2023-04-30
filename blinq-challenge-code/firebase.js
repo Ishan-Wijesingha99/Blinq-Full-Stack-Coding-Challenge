@@ -15,7 +15,7 @@ const firebaseConfig = {
 
 
 
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig, 'blinq-full-stack-challenge');
 
 export const auth = getAuth(app)
 export const db = getFirestore(app)
