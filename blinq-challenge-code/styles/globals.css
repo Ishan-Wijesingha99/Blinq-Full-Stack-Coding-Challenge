@@ -38,3 +38,15 @@ a {
   height: 3.5rem !important;
 }
 
+.register-form {
+  margin-top: 4rem;
+  width: 60%vw;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.register-title {
+  text-align: center;
+}
+
