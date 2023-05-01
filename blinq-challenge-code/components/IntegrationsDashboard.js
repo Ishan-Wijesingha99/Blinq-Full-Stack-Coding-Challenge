@@ -12,7 +12,10 @@ import IntegrationContainers from './IntegrationContainers'
 
 export default function IntegrationsDashboard() {
   const [formModal, setFormModal] = useState(false)
+  
   const [currentModalObject, setCurrentModalObject] = useState({})
+  const [currentIntegrationId, setCurrentIntegrationId] = useState('')
+  
   const [loginReminderModal, setLoginReminderModal] = useState(false)
 
   const { currentUser } = useAuth()
@@ -32,6 +35,8 @@ export default function IntegrationsDashboard() {
         setFormModal={setFormModal}
         currentModalObject={currentModalObject}
         setCurrentModalObject={setCurrentModalObject}
+        currentIntegrationId={currentIntegrationId}
+        setCurrentIntegrationId={setCurrentIntegrationId}
         loginReminderModal={loginReminderModal}
         setLoginReminderModal={setLoginReminderModal}
       />
@@ -139,6 +144,9 @@ export default function IntegrationsDashboard() {
         formModal={formModal}
         setFormModal={setFormModal}
         currentModalObject={currentModalObject}
+        setCurrentModalObject={setCurrentModalObject}
+        currentIntegrationId={currentIntegrationId}
+        setCurrentIntegrationId={setCurrentIntegrationId}
         />
       )}
 

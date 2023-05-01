@@ -6,21 +6,25 @@ import { collection, getDocs } from 'firebase/firestore'
 
 
 
-export default function IntegrationContainers({ formModal, setFormModal, loginReminderModal, setLoginReminderModal, currentModalObject, setCurrentModalObject}) {
+export default function IntegrationContainers({ formModal, setFormModal, loginReminderModal, setLoginReminderModal, currentModalObject, setCurrentModalObject, currentIntegrationId, setCurrentIntegrationId }) {
   const { currentUser } = useAuth()
   const [dataArray, setDataArray] = useState([])
-
-
+  const [collectionIdArray, setCollectionIdArray] = useState([])
 
   useEffect(() => {
 
     const getIntegrationData = async () => {
       const snapshots = await getDocs(collection(db, 'integrations'))
+
+
+      // need Ids for updating (persisting fields to database)
+      const IdData = snapshots.docs.map(object => object.id)
+      setCollectionIdArray(IdData)
   
+
+
       const data = snapshots.docs.map(doc => doc.data())
-
       setDataArray(data)
-
     }
   
     getIntegrationData()
@@ -39,6 +43,7 @@ export default function IntegrationContainers({ formModal, setFormModal, loginRe
           onClick={() => {
             if(currentUser) {
               setCurrentModalObject(object)
+              setCurrentIntegrationId(collectionIdArray[i])
               setFormModal(prevBool => !prevBool)
             } else {
               setLoginReminderModal(prevBool => !prevBool)
