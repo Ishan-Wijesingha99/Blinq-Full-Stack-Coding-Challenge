@@ -6,16 +6,19 @@ import zapierlogo from '../public/zapier-logo.png'
 import { useAuth } from '../context/AuthContext'
 import IntegrationModal from './IntegrationModal'
 import LoginReminderModal from './LoginReminderModal'
+import IntegrationContainers from './IntegrationContainers'
 
 
 
 export default function IntegrationsDashboard() {
   const [formModal, setFormModal] = useState(false)
+  const [currentModal, setCurrentModal] = useState('')
+
   const [loginReminderModal, setLoginReminderModal] = useState(false)
-  const [currentIntegrationName, setCurrentIntegrationName] = useState('')
-  const [currentInputArray, setCurrentInputArray] = useState([])
 
   const { currentUser } = useAuth()
+
+
 
   return (
     <div>
@@ -24,8 +27,20 @@ export default function IntegrationsDashboard() {
 
       <h1 className='integrations-page-title'>Available Integrations</h1>
 
+
+      <IntegrationContainers
+        formModal={formModal}
+        setFormModal={setFormModal}
+        currentModal={currentModal}
+        setCurrentModal={setCurrentModal}
+        loginReminderModal={loginReminderModal}
+        setLoginReminderModal={setLoginReminderModal}
+      />
+
+
+
       {/* salesforce integration */}
-      <div
+      {/* <div
       className='integration-container'
       onClick={() => {
         if(currentUser) {
@@ -50,10 +65,10 @@ export default function IntegrationsDashboard() {
           <p className='integration-text'>Integrate Salesforce with Blinq!</p>
         </div>
 
-      </div>
+      </div> */}
 
       {/* HubSpot integration */}
-      <div
+      {/* <div
       className='integration-container'
       onClick={() => {
         if(currentUser) {
@@ -78,10 +93,10 @@ export default function IntegrationsDashboard() {
           <p className='integration-text'>Integrate HubSpot with Blinq!</p>
         </div>
 
-      </div>
+      </div> */}
 
       {/* Zapier integration */}
-      <div
+      {/* <div
       className='integration-container'
       onClick={() => {
         if(currentUser) {
@@ -106,7 +121,18 @@ export default function IntegrationsDashboard() {
           <p className='integration-text'>Integrate Zapier with Blinq!</p>
         </div>
 
-      </div>
+      </div> */}
+
+
+
+
+
+
+
+
+
+
+
 
       {/* form modal */}
       {formModal && (
@@ -115,6 +141,7 @@ export default function IntegrationsDashboard() {
         setFormModal={setFormModal}
         currentIntegrationName={currentIntegrationName}
         currentInputArray={currentInputArray}
+        currentModal={currentModal}
         />
       )}
 

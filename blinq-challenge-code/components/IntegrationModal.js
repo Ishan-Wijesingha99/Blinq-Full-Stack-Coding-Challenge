@@ -6,7 +6,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 
 
-export default function IntegrationModal({ currentIntegrationName, currentInputArray, formModal, setFormModal }) {
+export default function IntegrationModal({ currentIntegrationName, currentInputArray, formModal, setFormModal, currentModal }) {
   
   const inputJSXArray = currentInputArray.map((element, i) => (
     <FloatingLabel
