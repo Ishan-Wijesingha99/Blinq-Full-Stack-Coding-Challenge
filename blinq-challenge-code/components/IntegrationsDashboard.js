@@ -5,11 +5,15 @@ import hubspotLogo from '../public/hubspot-logo.png'
 import zapierlogo from '../public/zapier-logo.png'
 import { useAuth } from '../context/AuthContext'
 import IntegrationModal from './IntegrationModal'
+import LoginReminderModal from './LoginReminderModal'
 
 
 
 export default function IntegrationsDashboard() {
-  const [openModal, setOpenModal] = useState(false)
+  const [formModal, setFormModal] = useState(false)
+  const [loginReminderModal, setLoginReminderModal] = useState(false)
+  const [currentIntegrationName, setCurrentIntegrationName] = useState('')
+  const [currentInputArray, setCurrentInputArray] = useState([])
 
   const { currentUser } = useAuth()
 
@@ -23,7 +27,15 @@ export default function IntegrationsDashboard() {
       {/* salesforce integration */}
       <div
       className='integration-container'
-      onClick={() => setOpenModal(prevBool => !prevBool)}
+      onClick={() => {
+        if(currentUser) {
+          setFormModal(prevBool => !prevBool)
+          setCurrentIntegrationName('Salesforce')
+          setCurrentInputArray(['client_id', 'client_secret'])
+        } else {
+          setLoginReminderModal(prevBool => !prevBool)
+        }
+      }}
       >
         <Image
         src={salesforceLogo}
@@ -43,7 +55,15 @@ export default function IntegrationsDashboard() {
       {/* HubSpot integration */}
       <div
       className='integration-container'
-      onClick={() => setOpenModal(prevBool => !prevBool)}
+      onClick={() => {
+        if(currentUser) {
+          setFormModal(prevBool => !prevBool)
+          setCurrentIntegrationName('HubSpot')
+          setCurrentInputArray(['tenant_domain', 'client_id', 'client_secret', 'field_mappings'])
+        } else {
+          setLoginReminderModal(prevBool => !prevBool)
+        }
+      }}
       >
         <Image
         src={hubspotLogo}
@@ -63,7 +83,15 @@ export default function IntegrationsDashboard() {
       {/* Zapier integration */}
       <div
       className='integration-container'
-      onClick={() => setOpenModal(prevBool => !prevBool)}
+      onClick={() => {
+        if(currentUser) {
+          setFormModal(prevBool => !prevBool)
+          setCurrentIntegrationName('Zapier')
+          setCurrentInputArray(['api_key'])
+        } else {
+          setLoginReminderModal(prevBool => !prevBool)
+        }
+      }}
       >
         <Image
         src={zapierlogo}
@@ -80,13 +108,25 @@ export default function IntegrationsDashboard() {
 
       </div>
 
-      {/* modal */}
-      {openModal && (
+      {/* form modal */}
+      {formModal && (
         <IntegrationModal
-        openModal={openModal}
-        setOpenModal={setOpenModal}
+        formModal={formModal}
+        setFormModal={setFormModal}
+        currentIntegrationName={currentIntegrationName}
+        currentInputArray={currentInputArray}
         />
       )}
+
+      {/* modal telling user to log in */}
+      {loginReminderModal && (
+        <LoginReminderModal
+        currentIntegrationName={currentIntegrationName}
+        loginReminderModal={loginReminderModal}
+        setLoginReminderModal={setLoginReminderModal}
+        />
+      )}
+
 
 
     </div>
