@@ -26,7 +26,7 @@ export default function Navigation() {
 
 
   return (
-    <Navbar bg="light" expand="lg" className='navbar-container'>
+    <Navbar bg="white" expand="lg" className='navbar-container'>
 
       <Container>
 
