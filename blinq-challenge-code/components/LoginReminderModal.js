@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 
 
-export default function LoginReminderModal({ currentIntegrationName, loginReminderModal, setLoginReminderModal }) {
+export default function LoginReminderModal({ currentModalObject, loginReminderModal, setLoginReminderModal }) {
 
   const router = useRouter()
 
@@ -13,17 +13,26 @@ export default function LoginReminderModal({ currentIntegrationName, loginRemind
   return (
     <div className='login-reminder-modal'>
       <div className='login-reminder-container'>
-        <h2>Please Log In or Register to Set up {currentIntegrationName} Integration</h2>
+        <h2 className='login-reminder-modal-title'>Please log in or register to set up {currentModalObject.name} integration</h2>
 
-        <button onClick={toLogin}>
+        <button
+        onClick={toLogin}
+        className='login-reminder-btn'
+        >
           Log In Page
         </button>
 
-        <button onClick={toRegister}>
+        <button
+        onClick={toRegister}
+        className='login-reminder-btn'
+        >
           Register Page
         </button>
 
-        <button onClick={() => setLoginReminderModal(false)}>
+        <button
+        onClick={() => setLoginReminderModal(false)}
+        className='login-reminder-btn'
+        >
           Okay
         </button>
       </div>

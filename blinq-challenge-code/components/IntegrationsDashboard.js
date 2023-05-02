@@ -153,7 +153,7 @@ export default function IntegrationsDashboard() {
       {/* modal telling user to log in */}
       {loginReminderModal && (
         <LoginReminderModal
-        currentIntegrationName={currentIntegrationName}
+        currentModalObject={currentModalObject}
         loginReminderModal={loginReminderModal}
         setLoginReminderModal={setLoginReminderModal}
         />

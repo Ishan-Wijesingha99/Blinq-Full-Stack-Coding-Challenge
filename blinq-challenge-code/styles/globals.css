@@ -256,3 +256,21 @@ a {
   border-radius: 80px;
   border: 2px solid #f35a57;
 }
+
+.login-reminder-modal-title {
+  color: white;
+  text-align: center;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  margin-bottom: 4rem;
+}
+
+.login-reminder-btn {
+  width: 60%;
+  height: 3.5rem;
+  margin-top: 1.5rem;
+  color: white;
+  background-color: #f35a57;
+  border-radius: 0.375rem;
+  border: 2px solid #f35a57;
+}
