@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 import { db } from '../firebase';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { useAuth } from '../context/AuthContext';
 
 
@@ -15,26 +15,47 @@ export default function IntegrationModal({ formModal, setFormModal, currentModal
 
   const [successfulModal, setSuccessfulModal] = useState(false)
   const [submitFormError, setSubmitFormError] = useState(false)
+  const [inputJSXArray, setInputJSXArray] = useState([])
 
   const { currentUser } = useAuth()
-  console.log(currentUser.uid)
-  
 
   
-  const inputJSXArray = currentModalObject.fields.map((element, i) => (
-    <FloatingLabel
-    label={element}
-    className='mt-4 modal-form-input'
-    key={i}
-    >
 
-      <Form.Control
-      className={`modal-form-input-${i}`}
-      type="text"
-      />
+  useEffect(() => {
 
-    </FloatingLabel>
-  ))
+    const setInputs = async () => {
+
+      const docRef = doc(db, 'integrations', currentIntegrationId)
+
+      const docSnap = await getDoc(docRef)
+      
+      setInputJSXArray(currentModalObject.fields.map((element, i) => {
+
+        const currentUserObject = docSnap.data()
+  
+        return (
+          <FloatingLabel
+          label={element}
+          className='mt-4 modal-form-input'
+          key={i}
+          >
+      
+            <Form.Control
+            className={`modal-form-input-${i}`}
+            type="text"
+            defaultValue={currentUserObject[currentUser.uid] ? currentUserObject[currentUser.uid][element] : ''}
+            />
+      
+          </FloatingLabel>
+        )
+  
+      }))
+
+    }
+
+    setInputs()
+
+  }, [formModal])
 
 
   
