@@ -7,8 +7,8 @@ export default function LoginReminderModal({ currentModalObject, loginReminderMo
 
   const router = useRouter()
 
-  const toLogin = () => router('/login')
-  const toRegister = () => router('/register')
+  const toLogin = () => router.push('/login')
+  const toRegister = () => router.push('/register')
 
   return (
     <div className='login-reminder-modal'>
@@ -17,21 +17,21 @@ export default function LoginReminderModal({ currentModalObject, loginReminderMo
 
         <button
         onClick={toLogin}
-        className='login-reminder-btn'
+        className='modal-btn'
         >
           Log In Page
         </button>
 
         <button
         onClick={toRegister}
-        className='login-reminder-btn'
+        className='modal-btn'
         >
           Register Page
         </button>
 
         <button
         onClick={() => setLoginReminderModal(false)}
-        className='login-reminder-btn'
+        className='modal-btn'
         >
           Okay
         </button>

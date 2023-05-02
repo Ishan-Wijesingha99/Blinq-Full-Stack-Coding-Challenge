@@ -13,8 +13,13 @@ import { useAuth } from '../context/AuthContext';
 
 export default function IntegrationModal({ formModal, setFormModal, currentModalObject, setCurrentModalObject, currentIntegrationId, setCurrentIntegrationId }) {
 
+  const [successfulModal, setSuccessfulModal] = useState(false)
+  const [submitFormError, setSubmitFormError] = useState(false)
+
   const { currentUser } = useAuth()
   console.log(currentUser.uid)
+  
+
   
   const inputJSXArray = currentModalObject.fields.map((element, i) => (
     <FloatingLabel
@@ -48,8 +53,6 @@ export default function IntegrationModal({ formModal, setFormModal, currentModal
         [fieldName]: document.querySelector(`.modal-form-input-${i}`).value
       }
 
-      console.log(fieldName, i, document.querySelector(`.modal-form-input-${i}`).value)
-      console.log(newObj)
     })
 
     // spread newObj and currentModalObject, and also add uid, then update document in firestore
@@ -59,19 +62,33 @@ export default function IntegrationModal({ formModal, setFormModal, currentModal
         uid: currentUser.uid,
         ...newObj
       }
-    }).then(data => console.log('update successful!')).catch(err => console.log(err))
-
-    setCurrentModalObject(prevObject => {
-      return {
-        ...prevObject,
-        [currentUser.uid]: {
-          uid: currentUser.uid,
-          ...newObj
-        }
-      }
     })
+    .then(data => {
+      console.log('update successful!')
 
-    // take user to a page that says update succesful! then return them to integrations page
+      // set currentModalObject to updated object
+      setCurrentModalObject(prevObject => {
+        return {
+          ...prevObject,
+          [currentUser.uid]: {
+            uid: currentUser.uid,
+            ...newObj
+          }
+        }
+      })
+
+      // take user to new modal that says update has been successful
+      setSuccessfulModal(true)
+
+      // if firestore was successfully updated, make sure error message goes away
+      setSubmitFormError(false)
+
+    })
+    .catch(err => {
+      console.log(err)
+      // if adding changes to firestore is unsuccessful, show error message
+      setSubmitFormError(true)
+    })
 
   }
 
@@ -79,30 +96,56 @@ export default function IntegrationModal({ formModal, setFormModal, currentModal
   
   return (
     <div className='integration-modal'>
-      <Form
-      className='integration-modal-form'
-      onSubmit={submitHandler}
-      >
+
+      {
+        successfulModal
+        ?
+        (
+          <div className='successful-modal'>
+            <h2 className='successful-modal-title'>Integration completed successfully!</h2>
+
+            <button
+            className="modal-btn"
+            onClick={() => {
+              setFormModal(prevBool => !prevBool)
+              setSuccessfulModal(false)
+            }}
+            >
+              Okay
+            </button>
+          </div>
+        )
+        :
+        (
+          <Form
+          className='integration-modal-form'
+          onSubmit={submitHandler}
+          >
         
-        <h1 className='modal-title'>Add {currentModalObject.name} Integration</h1>
+            <h1 className='modal-title'>Add {currentModalObject.name} Integration</h1>
 
-        {inputJSXArray}
+            {inputJSXArray}
 
-        <Button
-        type="submit"
-        className='modal-form-btn'
-        >
-          Add Integration
-        </Button>
+            <Button
+            type="submit"
+            className='modal-form-btn'
+            >
+              Add Integration
+            </Button>
 
-        <Button
-        onClick={() => setFormModal(prevBool => !prevBool)}
-        className='modal-form-btn'
-        >
-          Cancel
-        </Button>
+            <Button
+            onClick={() => setFormModal(prevBool => !prevBool)}
+            className='modal-form-btn'
+            >
+              Cancel
+            </Button>
 
-      </Form>
+            {submitFormError && <p className='submit-form-error-msg'>An error occured when trying to set up this integration</p>}
+
+          </Form>
+        )
+      }
+
     </div>
   )
 }

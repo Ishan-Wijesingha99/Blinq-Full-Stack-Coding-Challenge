@@ -265,7 +265,7 @@ a {
   margin-bottom: 4rem;
 }
 
-.login-reminder-btn {
+.modal-btn {
   width: 60%;
   height: 3.5rem;
   margin-top: 1.5rem;
@@ -273,4 +273,33 @@ a {
   background-color: #f35a57;
   border-radius: 0.375rem;
   border: 2px solid #f35a57;
+}
+
+.submit-form-error-msg {
+  color: #f35a57;
+  margin-top: 1rem;
+}
+
+.successful-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 8rem;
+  background-color: #272829;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  border-radius: 80px;
+  border: 2px solid #f35a57;
+}
+
+.successful-modal-title {
+  color: white;
+  text-align: center;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  margin-bottom: 4rem;
 }
