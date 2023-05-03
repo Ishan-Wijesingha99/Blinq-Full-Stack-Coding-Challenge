@@ -30,6 +30,14 @@ export default function IntegrationsDashboard() {
       <h1 className='integrations-page-title'>Available Integrations</h1>
 
 
+
+      <AddIntegration
+      loginReminderModal={loginReminderModal}
+      setLoginReminderModal={setLoginReminderModal}
+      customIntegrationModal={customIntegrationModal}
+      setCustomIntegrationModal={setCustomIntegrationModal}
+      />
+
       <IntegrationContainers
         formModal={formModal}
         setFormModal={setFormModal}
@@ -41,12 +49,6 @@ export default function IntegrationsDashboard() {
         setLoginReminderModal={setLoginReminderModal}
       />
 
-      <AddIntegration
-      loginReminderModal={loginReminderModal}
-      setLoginReminderModal={setLoginReminderModal}
-      customIntegrationModal={customIntegrationModal}
-      setCustomIntegrationModal={setCustomIntegrationModal}
-      />
 
 
       {/* form modal */}
