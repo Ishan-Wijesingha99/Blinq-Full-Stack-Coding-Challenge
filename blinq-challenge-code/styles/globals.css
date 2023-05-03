@@ -357,4 +357,48 @@ a {
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
+  width: 60%;
 }
+
+#custom-integration-name {
+  margin-left: 10px;
+  border-radius: 0.375rem;
+  border: 2px solid white;
+  padding: 0.5rem;
+}
+
+.add-field-btn {
+  width: 60%;
+  padding: 0.5rem;
+  margin-top: 1.5rem;
+  color: white;
+  background-color: #f35a57;
+  border-radius: 0.375rem;
+  border: 2px solid #f35a57;
+  margin-bottom: 1rem;
+}
+
+.two-inputs {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-field-input {
+  border-radius: 0.375rem;
+  border: 2px solid white;
+  padding: 0.5rem;
+}
+
+.add-integration-btn {
+  width: 60%;
+  padding: 0.5rem;
+  margin-top: 2.5rem;
+  color: white;
+  background-color: #f35a57;
+  border-radius: 0.375rem;
+  border: 2px solid #f35a57;
+  margin-bottom: 1rem;
+}
+
