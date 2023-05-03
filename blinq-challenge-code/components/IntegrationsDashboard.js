@@ -1,22 +1,22 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
-import salesforceLogo from '../public/salesforce-logo.png'
-import hubspotLogo from '../public/hubspot-logo.png'
-import zapierlogo from '../public/zapier-logo.png'
 import { useAuth } from '../context/AuthContext'
 import IntegrationModal from './IntegrationModal'
 import LoginReminderModal from './LoginReminderModal'
 import IntegrationContainers from './IntegrationContainers'
+import AddIntegration from './AddIntegration'
+import CustomIntegrationModal from './CustomIntegrationModal'
 
 
 
 export default function IntegrationsDashboard() {
   const [formModal, setFormModal] = useState(false)
+  const [loginReminderModal, setLoginReminderModal] = useState(false)
+  const [customIntegrationModal, setCustomIntegrationModal] = useState(false)
   
   const [currentModalObject, setCurrentModalObject] = useState({})
   const [currentIntegrationId, setCurrentIntegrationId] = useState('')
-  
-  const [loginReminderModal, setLoginReminderModal] = useState(false)
+
 
   const { currentUser } = useAuth()
 
@@ -41,6 +41,12 @@ export default function IntegrationsDashboard() {
         setLoginReminderModal={setLoginReminderModal}
       />
 
+      <AddIntegration
+      loginReminderModal={loginReminderModal}
+      setLoginReminderModal={setLoginReminderModal}
+      customIntegrationModal={customIntegrationModal}
+      setCustomIntegrationModal={setCustomIntegrationModal}
+      />
 
 
       {/* form modal */}
@@ -59,11 +65,19 @@ export default function IntegrationsDashboard() {
       {loginReminderModal && (
         <LoginReminderModal
         currentModalObject={currentModalObject}
+        setCurrentModalObject={setCurrentModalObject}
         loginReminderModal={loginReminderModal}
         setLoginReminderModal={setLoginReminderModal}
         />
       )}
 
+      {/* modal for adding a custom integration */}
+      {customIntegrationModal && (
+        <CustomIntegrationModal
+        customIntegrationModal={customIntegrationModal}
+        setCustomIntegrationModal={setCustomIntegrationModal}
+        />
+      )}
 
 
     </div>

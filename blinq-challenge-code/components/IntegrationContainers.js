@@ -47,7 +47,7 @@ export default function IntegrationContainers({ formModal, setFormModal, loginRe
               setFormModal(prevBool => !prevBool)
             } else {
               setCurrentModalObject(object)
-              setLoginReminderModal(prevBool => !prevBool)
+              setLoginReminderModal(true)
               }
           }}
           key={i}
