@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth'
-import { getFirestore } from 'firebase/firestore'
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
 // need this to set up connection to firebase
 const firebaseConfig = {
@@ -16,6 +16,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig, 'blinq-full-stack-challenge');
 
 // set up firebase auth
-export const auth = getAuth(app)
+export const auth = getAuth(app);
 // set up firestore database
-export const db = getFirestore(app)
+export const db = getFirestore(app);

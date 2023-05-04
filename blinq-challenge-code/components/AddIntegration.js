@@ -1,18 +1,18 @@
-import React from 'react'
-import { useAuth } from '../context/AuthContext'
+import React from 'react';
+import { useAuth } from '../context/AuthContext';
 
 export default function AddIntegration({ setLoginReminderModal, setCustomIntegrationModal }) {
   // get currentUser from Auth context
-  const { currentUser } = useAuth() 
+  const { currentUser } = useAuth();
 
   return (
     <div
     className='add-integration-container'
     onClick={() => {
       if(currentUser) {
-        setCustomIntegrationModal(true)
+        setCustomIntegrationModal(true);
       } else {
-        setLoginReminderModal(true)
+        setLoginReminderModal(true);
       }
     }}
     >

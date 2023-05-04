@@ -1,16 +1,16 @@
-import React from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import appStoreImg from  '../public/app-store.webp'
-import goooglePlayImg from '../public/google-play.webp'
-import SOCImg from '../public/soc-2-certified.webp'
-import footerLogo from '../public/footer-logo.png'
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import appStoreImg from  '../public/app-store.webp';
+import goooglePlayImg from '../public/google-play.webp';
+import SOCImg from '../public/soc-2-certified.webp';
+import footerLogo from '../public/footer-logo.png';
 
 export default function Footer() {
   // function to return home
-  const router = useRouter()
-  const goHome = () => router.push('/')
+  const router = useRouter();
+  const goHome = () => router.push('/');
 
   return (
     <div className='footer-container'>

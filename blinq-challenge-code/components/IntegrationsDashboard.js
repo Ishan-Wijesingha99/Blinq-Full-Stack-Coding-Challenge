@@ -1,21 +1,21 @@
-import React, { useState } from 'react'
-import { useAuth } from '../context/AuthContext'
-import IntegrationModal from './IntegrationModal'
-import LoginReminderModal from './LoginReminderModal'
-import IntegrationContainers from './IntegrationContainers'
-import AddIntegration from './AddIntegration'
-import CustomIntegrationModal from './CustomIntegrationModal'
+import React, { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
+import IntegrationModal from './IntegrationModal';
+import LoginReminderModal from './LoginReminderModal';
+import IntegrationContainers from './IntegrationContainers';
+import AddIntegration from './AddIntegration';
+import CustomIntegrationModal from './CustomIntegrationModal';
 
 export default function IntegrationsDashboard() {
-  const [formModal, setFormModal] = useState(false)
-  const [loginReminderModal, setLoginReminderModal] = useState(false)
-  const [customIntegrationModal, setCustomIntegrationModal] = useState(false)
-  const [currentModalObject, setCurrentModalObject] = useState({})
-  const [currentIntegrationId, setCurrentIntegrationId] = useState('')
-  const [updatedIntegrationList, setUpdatedIntegrationList] = useState(false)
+  const [formModal, setFormModal] = useState(false);
+  const [loginReminderModal, setLoginReminderModal] = useState(false);
+  const [customIntegrationModal, setCustomIntegrationModal] = useState(false);
+  const [currentModalObject, setCurrentModalObject] = useState({});
+  const [currentIntegrationId, setCurrentIntegrationId] = useState('');
+  const [updatedIntegrationList, setUpdatedIntegrationList] = useState(false);
 
   // get currentUser from Auth context
-  const { currentUser } = useAuth()
+  const { currentUser } = useAuth();
 
   return (
     <div>

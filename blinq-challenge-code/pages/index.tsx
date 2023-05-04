@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import IntegrationsDashboard from '../components/IntegrationsDashboard'
+import IntegrationsDashboard from '../components/IntegrationsDashboard';
 
 const Home: NextPage = () => {
   return (

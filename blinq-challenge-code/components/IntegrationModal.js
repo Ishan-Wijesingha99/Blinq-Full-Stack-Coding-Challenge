@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
@@ -7,27 +7,27 @@ import { db } from '../firebase';
 import { useAuth } from '../context/AuthContext';
 
 export default function IntegrationModal({ formModal, setFormModal, currentModalObject, setCurrentModalObject, currentIntegrationId, setUpdatedIntegrationList }) {
-  const [successfulModal, setSuccessfulModal] = useState(false)
-  const [successfulModalMessage, setSuccessfulModalMessage] = useState('')
-  const [errorMessage, setErrorMessage] = useState('')
-  const [inputJSXArray, setInputJSXArray] = useState([])
+  const [successfulModal, setSuccessfulModal] = useState(false);
+  const [successfulModalMessage, setSuccessfulModalMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [inputJSXArray, setInputJSXArray] = useState([]);
 
   // get currentUser from Auth context
-  const { currentUser } = useAuth()
+  const { currentUser } = useAuth();
 
   useEffect(() => {
 
     // define async function inside useEffect and then call it
     const setInputs = async () => {
       // get document with the currentIntegrationId
-      const docRef = doc(db, 'integrations', currentIntegrationId)
+      const docRef = doc(db, 'integrations', currentIntegrationId);
 
-      const docSnap = await getDoc(docRef)
+      const docSnap = await getDoc(docRef);
 
       // loop over currentModalObject.fields to create inputs for each of the integration's specific fields
       setInputJSXArray(currentModalObject.fields.map((element, i) => {
         // extract data
-        const currentUserObject = docSnap.data()
+        const currentUserObject = docSnap.data();
 
         return (
           <FloatingLabel
@@ -47,26 +47,28 @@ export default function IntegrationModal({ formModal, setFormModal, currentModal
 
     }
 
-    setInputs()
+    setInputs();
 
   }, [formModal])
 
   const submitHandler = event => {
     // prevent reloading of page
-    event.preventDefault()
+    event.preventDefault();
 
-    let newObj
+    let newObj;
 
-    const docRef = doc(db, "integrations", currentIntegrationId)
+    // get specific document with currentIntegrationId
+    const docRef = doc(db, "integrations", currentIntegrationId);
 
+    // loop through currentModalObject.fields and add to newObj the new fieldName, as well as the value from user input
     currentModalObject.fields.forEach((fieldName, i) => {
       newObj = {
         ...newObj,
         [fieldName]: document.querySelector(`.modal-form-input-${i}`).value
-      }
+      };
     })
 
-    // spread newObj and currentModalObject, and also add uid, then update document in firestore
+    // update document in firestore by spreading newObj and currentModalObject, also add uid
     setDoc(docRef, {
       ...currentModalObject,
       [currentUser.uid]: {
@@ -87,37 +89,40 @@ export default function IntegrationModal({ formModal, setFormModal, currentModal
       })
 
       // take user to new modal that says update has been successful
-      setSuccessfulModal(true)
-      setSuccessfulModalMessage('Integration completed successfully!')
+      setSuccessfulModal(true);
+      setSuccessfulModalMessage('Integration completed successfully!');
 
       // if firestore was successfully updated, make sure error message goes away
-      setErrorMessage('')
+      setErrorMessage('');
     })
     .catch(err => {
-      console.log(err)
+      console.log(err);
 
       // if adding changes to firestore is unsuccessful, show error message
-      setErrorMessage('An error occured when trying to set up this integration')
+      setErrorMessage('An error occured when trying to set up this integration');
     })
 
   }
 
   const deleteIntegration = () => {
-    const docRef = doc(db, 'integrations', currentIntegrationId)
+    // get specific document with currentIntegrationId 
+    const docRef = doc(db, 'integrations', currentIntegrationId);
 
+    // delete document from firestore
     deleteDoc(docRef)
     .then(() => {
       // direct user to successful modal
-      setSuccessfulModal(true)
-      setSuccessfulModalMessage('Integration deleted successfully!')
+      setSuccessfulModal(true);
+      setSuccessfulModalMessage('Integration deleted successfully!');
 
       // reload integration containers by changing this state
-      setUpdatedIntegrationList(prev => !prev)
+      setUpdatedIntegrationList(prev => !prev);
     })
     .catch(err => {
-      console.log(err)
+      console.log(err);
 
-      setErrorMessage('An error occured when trying to delete this integration')
+      // if error occured, display error message by changing this state
+      setErrorMessage('An error occured when trying to delete this integration');
     })
   }
 
@@ -134,8 +139,8 @@ export default function IntegrationModal({ formModal, setFormModal, currentModal
             <button
             className="modal-btn"
             onClick={() => {
-              setFormModal(false)
-              setSuccessfulModal(false)
+              setFormModal(false);
+              setSuccessfulModal(false);
             }}
             >
               Okay

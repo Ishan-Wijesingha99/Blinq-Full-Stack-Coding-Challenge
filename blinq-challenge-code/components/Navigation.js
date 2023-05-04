@@ -1,21 +1,21 @@
-import React from 'react'
+import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Image from 'next/image';
-import { useRouter } from 'next/router'
-import navbarImage from '../public/navbar-image.png'
+import { useRouter } from 'next/router';
+import navbarImage from '../public/navbar-image.png';
 import { useAuth } from '../context/AuthContext';
 
 export default function Navigation() {
   // get currentUser and logout function from Auth context
-  const { currentUser, logout } = useAuth()
+  const { currentUser, logout } = useAuth();
 
   // creating functions to take user to different pages
-  const router = useRouter()
-  const goHome = () => router.push('/')
-  const goRegister = () => router.push('/register')
-  const goLogin = () => router.push('/login')
+  const router = useRouter();
+  const goHome = () => router.push('/');
+  const goRegister = () => router.push('/register');
+  const goLogin = () => router.push('/login');
 
   return (
     <Navbar bg="white" expand="lg" className='navbar-container'>

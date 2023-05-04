@@ -1,37 +1,40 @@
-import React from 'react'
-import { useState } from 'react'
+import React from 'react';
+import { useState } from 'react';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Link from 'next/link';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import Head from 'next/head';
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../context/AuthContext';
 
 export default function RegisterPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [passwordsNotMatching, setPasswordsNotMatching] = useState(false)
-  const [serverSideError, setServerSideError] = useState(null)
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordsNotMatching, setPasswordsNotMatching] = useState(false);
+  const [serverSideError, setServerSideError] = useState(null);
 
-  const { currentUser, signup } = useAuth()
-  const router = useRouter()
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  // need this to check if user is logged in, and also to register user
+  const { currentUser, signup } = useAuth();
+  // need this to change url
+  const router = useRouter();
+  // need this for client-side validation, using react-hook-form npm package
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
   const submitHandler = async () => {
-    if(password !== confirmPassword) return setPasswordsNotMatching(true)
+    if(password !== confirmPassword) return setPasswordsNotMatching(true);
 
     try {
       // signup function also logs user in
-      await signup(email, password)
+      await signup(email, password);
 
       // then redirect them to integrations page "/"
-      router.push('/')
+      router.push('/');
     } catch (error) {
       // if email already exists in database
-      if(error.message === 'Firebase: Error (auth/email-already-in-use).') setServerSideError('Email already exists in our database')
+      if(error.message === 'Firebase: Error (auth/email-already-in-use).') setServerSideError('Email already exists in our database');
     }
   }
 
@@ -82,7 +85,6 @@ export default function RegisterPage() {
                 onChange={e => setEmail(e.target.value)}
                 />
               </FloatingLabel>
-
 
               <FloatingLabel
               controlId="floatingPassword"

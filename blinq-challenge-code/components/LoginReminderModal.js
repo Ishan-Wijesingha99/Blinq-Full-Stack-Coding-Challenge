@@ -1,12 +1,12 @@
-import React from 'react'
-import { useRouter } from 'next/router'
+import React from 'react';
+import { useRouter } from 'next/router';
 
 export default function LoginReminderModal({ setCurrentModalObject, setLoginReminderModal }) {
 
   // functions to take user to /login or /register
-  const router = useRouter()
-  const toLogin = () => router.push('/login')
-  const toRegister = () => router.push('/register')
+  const router = useRouter();
+  const toLogin = () => router.push('/login');
+  const toRegister = () => router.push('/register');
 
   return (
     <div className='login-reminder-modal'>
@@ -16,8 +16,8 @@ export default function LoginReminderModal({ setCurrentModalObject, setLoginRemi
         <button
         className='modal-btn'
         onClick={() => {
-          toLogin()
-          setCurrentModalObject({})
+          toLogin();
+          setCurrentModalObject({});
         }}
         >
           Log In Page
@@ -26,8 +26,8 @@ export default function LoginReminderModal({ setCurrentModalObject, setLoginRemi
         <button
         className='modal-btn'
         onClick={() => {
-          toRegister()
-          setCurrentModalObject({})
+          toRegister();
+          setCurrentModalObject({});
         }}
         >
           Register Page
@@ -36,8 +36,8 @@ export default function LoginReminderModal({ setCurrentModalObject, setLoginRemi
         <button
         className='modal-btn'
         onClick={() => {
-          setLoginReminderModal(false)
-          setCurrentModalObject({})
+          setLoginReminderModal(false);
+          setCurrentModalObject({});
         }}
         >
           Okay

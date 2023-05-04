@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
-import { collection, addDoc } from 'firebase/firestore'
-import { db } from '../firebase'
-import { useAuth } from '../context/AuthContext'
+import React, { useState } from 'react';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../firebase';
+import { useAuth } from '../context/AuthContext';
 
 export default function CustomIntegrationModal({ setCustomIntegrationModal, setUpdatedIntegrationList }) {
-  const [arrayOfInputs, setArrayOfInputs] = useState([])
-  const [errorMessage, setErrorMessage] = useState('')
-  const [successfulModal, setSuccessfulModal] = useState(false)
+  const [arrayOfInputs, setArrayOfInputs] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successfulModal, setSuccessfulModal] = useState(false);
 
   // get currentUser from Auth context
-  const { currentUser } = useAuth()
+  const { currentUser } = useAuth();
 
   const addIntegration = () => {
 
@@ -19,40 +19,38 @@ export default function CustomIntegrationModal({ setCustomIntegrationModal, setU
     document.querySelectorAll('.integration-title').forEach(htmlElement => {
 
       if(htmlElement.innerHTML == document.querySelector('.integration-name-input').value) {
-        setErrorMessage('Integration with this name already exists')
+        setErrorMessage('Integration with this name already exists');
 
-        passedValidation = false
+        passedValidation = false;
       }
 
     })
-    if(!passedValidation) return
+    if(!passedValidation) return;
 
     // defining the following for more client side validation and for persisting data to firestore
-    let keysAndValues = {}
-    let keys = []
-    let values = []
+    let keysAndValues = {};
+    let keys = [];
+    let values = [];
 
     for (let i = 0; i < arrayOfInputs.length; i++) {
-
       // creating object based on user input
       keysAndValues = {
         ...keysAndValues,
         [document.querySelector(`.input-left-${i}`).value]: document.querySelector(`.input-right-${i}`).value
-      }
+      };
 
       // creating array of keys
-      keys = [...keys, document.querySelector(`.input-left-${i}`).value]
+      keys = [...keys, document.querySelector(`.input-left-${i}`).value];
 
       // creating array of values
-      values = [...values, document.querySelector(`.input-right-${i}`).value]
-
+      values = [...values, document.querySelector(`.input-right-${i}`).value];
     }
 
     // client-side validation, making sure fields aren't empty
-    if(keys.includes('') || values.includes('') || document.querySelector('.integration-name-input').value == '') return setErrorMessage('Fields cannot be empty')
+    if(keys.includes('') || values.includes('') || document.querySelector('.integration-name-input').value == '') return setErrorMessage('Fields cannot be empty');
 
     // adding custom integration to firestore
-    const dbRef = collection(db, 'integrations')
+    const dbRef = collection(db, 'integrations');
 
     addDoc(dbRef, {
       [currentUser.uid]: {
@@ -63,25 +61,25 @@ export default function CustomIntegrationModal({ setCustomIntegrationModal, setU
     })
     .then(() => {
       // change updatedIntegrationList state so that api call for integrations update
-      setUpdatedIntegrationList(prev => !prev)
+      setUpdatedIntegrationList(prev => !prev);
 
       // if the document has been added successfully, direct users to the successful modal
-      setSuccessfulModal(true)
+      setSuccessfulModal(true);
 
       // set errorMessage state to ''
-      setErrorMessage('')
+      setErrorMessage('');
     })
     .catch(err => {
-      console.log(err)
+      console.log(err);
 
       // if there was an error, display the error message by changing the state
-      setErrorMessage('There was an error setting up this integration')
+      setErrorMessage('There was an error setting up this integration');
 
       // empty all the input values
       for (let i = 0; i < arrayOfInputs.length; i++) {
-        document.querySelector('.integration-name-input').value = ''
-        document.querySelector(`.input-left-${i}`).value = ''
-        document.querySelector(`.input-right-${i}`).value = ''
+        document.querySelector('.integration-name-input').value = '';
+        document.querySelector(`.input-left-${i}`).value = '';
+        document.querySelector(`.input-right-${i}`).value = '';
       }
     })
 
@@ -100,8 +98,8 @@ export default function CustomIntegrationModal({ setCustomIntegrationModal, setU
             <button
             className="modal-btn"
             onClick={() => {
-              setCustomIntegrationModal(false)
-              setSuccessfulModal(false)
+              setCustomIntegrationModal(false);
+              setSuccessfulModal(false);
             }}
             >
               Okay
@@ -132,7 +130,7 @@ export default function CustomIntegrationModal({ setCustomIntegrationModal, setU
             <button
             className='add-field-btn'
             onClick={() => {
-              setArrayOfInputs(prevArray => [...prevArray, {}])
+              setArrayOfInputs(prevArray => [...prevArray, {}]);
             }}
             >
               Add Field

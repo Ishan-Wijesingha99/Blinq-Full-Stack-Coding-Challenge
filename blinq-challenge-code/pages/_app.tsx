@@ -1,9 +1,9 @@
-import Head from 'next/head'
+import Head from 'next/head';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import type { AppProps } from 'next/app'
-import '../styles/globals.css'
-import Layout from '../components/Layout'
-import { AuthProvider } from '../context/AuthContext'
+import type { AppProps } from 'next/app';
+import '../styles/globals.css';
+import Layout from '../components/Layout';
+import { AuthProvider } from '../context/AuthContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -21,4 +21,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   )
 }
 
-export default MyApp
+export default MyApp;

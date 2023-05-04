@@ -1,37 +1,40 @@
 import Button from 'react-bootstrap/Button';
-import React from 'react'
-import { useState } from 'react'
+import React from 'react';
+import { useState } from 'react';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import Head from 'next/head';
 import { useAuth } from '../context/AuthContext';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [serverSideError, setServerSideError] = useState(null)
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [serverSideError, setServerSideError] = useState(null);
 
-  const { currentUser, login } = useAuth()
-  const router = useRouter()
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  // need this to check if user is logged in, and also to log user in
+  const { currentUser, login } = useAuth();
+  // need this to change url
+  const router = useRouter();
+  // need this for client-side validation, using react-hook-form npm package
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
   const submitHandler = async event => {
    
     try {
       // log them in
-      await login(email, password)
+      await login(email, password);
       
       // then redirect them to integrations page "/"
-      router.push('/')
+      router.push('/');
     } catch (error) {
       // if password is incorrect
-      if(error.message === 'Firebase: Error (auth/wrong-password).') setServerSideError('Incorrect password')
+      if(error.message === 'Firebase: Error (auth/wrong-password).') setServerSideError('Incorrect password');
 
       // if email does not exist in database
-      if(error.message === 'Firebase: Error (auth/user-not-found).') setServerSideError('Email not found in our database')
+      if(error.message === 'Firebase: Error (auth/user-not-found).') setServerSideError('Email not found in our database');
     }
   }
   
@@ -82,7 +85,6 @@ export default function LoginPage() {
                 onChange={e => setEmail(e.target.value)}
                 />
               </FloatingLabel>
-
 
               <FloatingLabel
               controlId="floatingPassword"
