@@ -1,20 +1,15 @@
 import React, { useState } from 'react'
-import { db } from '../firebase'
 import { collection, addDoc } from 'firebase/firestore'
+import { db } from '../firebase'
 import { useAuth } from '../context/AuthContext'
 
-
-
-export default function CustomIntegrationModal({ customIntegrationModal, setCustomIntegrationModal, updatedIntegrationList, setUpdatedIntegrationList }) {
+export default function CustomIntegrationModal({ setCustomIntegrationModal, setUpdatedIntegrationList }) {
   const [arrayOfInputs, setArrayOfInputs] = useState([])
   const [errorMessage, setErrorMessage] = useState('')
   const [successfulModal, setSuccessfulModal] = useState(false)
 
+  // get currentUser from Auth context
   const { currentUser } = useAuth()
-
-  
-
-
 
   const addIntegration = () => {
 
@@ -32,31 +27,31 @@ export default function CustomIntegrationModal({ customIntegrationModal, setCust
     })
     if(!passedValidation) return
 
-
-
+    // defining the following for more client side validation and for persisting data to firestore
     let keysAndValues = {}
     let keys = []
     let values = []
 
     for (let i = 0; i < arrayOfInputs.length; i++) {
 
+      // creating object based on user input
       keysAndValues = {
         ...keysAndValues,
         [document.querySelector(`.input-left-${i}`).value]: document.querySelector(`.input-right-${i}`).value
       }
 
+      // creating array of keys
       keys = [...keys, document.querySelector(`.input-left-${i}`).value]
 
+      // creating array of values
       values = [...values, document.querySelector(`.input-right-${i}`).value]
-
-      console.log(keys)
-      console.log(values)
 
     }
 
     // client-side validation, making sure fields aren't empty
     if(keys.includes('') || values.includes('') || document.querySelector('.integration-name-input').value == '') return setErrorMessage('Fields cannot be empty')
 
+    // adding custom integration to firestore
     const dbRef = collection(db, 'integrations')
 
     addDoc(dbRef, {
@@ -66,13 +61,11 @@ export default function CustomIntegrationModal({ customIntegrationModal, setCust
       name: document.querySelector('.integration-name-input').value,
       fields: keys
     })
-    .then(data => {
-      console.log('Document added successfully!')
-
+    .then(() => {
       // change updatedIntegrationList state so that api call for integrations update
       setUpdatedIntegrationList(prev => !prev)
 
-      // if the document has been added successfully, you must direct users to the successful modal
+      // if the document has been added successfully, direct users to the successful modal
       setSuccessfulModal(true)
 
       // set errorMessage state to ''
@@ -81,25 +74,19 @@ export default function CustomIntegrationModal({ customIntegrationModal, setCust
     .catch(err => {
       console.log(err)
 
-      // if there was an error, you need to display the error message by changing the state
+      // if there was an error, display the error message by changing the state
       setErrorMessage('There was an error setting up this integration')
 
       // empty all the input values
       for (let i = 0; i < arrayOfInputs.length; i++) {
-
         document.querySelector('.integration-name-input').value = ''
-
         document.querySelector(`.input-left-${i}`).value = ''
-  
         document.querySelector(`.input-right-${i}`).value = ''
-  
       }
     })
 
   }
 
-
-  
   return (
     <div className='custom-integration-modal'>
 
@@ -128,7 +115,6 @@ export default function CustomIntegrationModal({ customIntegrationModal, setCust
             <h2>Add Custom Integration</h2>
 
             <div className='custom-integration-name-container'>
-
               <label
               htmlFor="custom-integration-name"
               className='custom-integration-placeholder'
@@ -141,7 +127,6 @@ export default function CustomIntegrationModal({ customIntegrationModal, setCust
               id='custom-integration-name'
               className='integration-name-input'  
               />
-
             </div>
 
             <button

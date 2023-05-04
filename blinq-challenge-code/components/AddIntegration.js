@@ -1,9 +1,8 @@
 import React from 'react'
 import { useAuth } from '../context/AuthContext'
 
-
-
-export default function AddIntegration({ loginReminderModal, setLoginReminderModal, customIntegrationModal, setCustomIntegrationModal }) {
+export default function AddIntegration({ setLoginReminderModal, setCustomIntegrationModal }) {
+  // get currentUser from Auth context
   const { currentUser } = useAuth() 
 
   return (
