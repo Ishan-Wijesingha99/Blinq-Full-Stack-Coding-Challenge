@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext'
 
 
 
-export default function CustomIntegrationModal({ customIntegrationModal, setCustomIntegrationModal }) {
+export default function CustomIntegrationModal({ customIntegrationModal, setCustomIntegrationModal, updatedIntegrationList, setUpdatedIntegrationList }) {
   const [arrayOfInputs, setArrayOfInputs] = useState([])
   const [errorMessage, setErrorMessage] = useState('')
   const [successfulModal, setSuccessfulModal] = useState(false)
@@ -48,6 +48,9 @@ export default function CustomIntegrationModal({ customIntegrationModal, setCust
     })
     .then(data => {
       console.log('Document added successfully!')
+
+      // change updatedIntegrationList state so that api call for integrations update
+      setUpdatedIntegrationList(prev => !prev)
 
       // if the document has been added successfully, you must direct users to the successful modal
       setSuccessfulModal(true)

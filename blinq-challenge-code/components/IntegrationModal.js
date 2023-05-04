@@ -25,13 +25,7 @@ export default function IntegrationModal({ formModal, setFormModal, currentModal
 
     const setInputs = async () => {
 
-      const docRef = doc(db, 'integrations', currentIntegrationId)
-
-      const docSnap = await getDoc(docRef)
-      
       setInputJSXArray(currentModalObject.fields.map((element, i) => {
-
-        const currentUserObject = docSnap.data()
   
         return (
           <FloatingLabel
@@ -43,7 +37,7 @@ export default function IntegrationModal({ formModal, setFormModal, currentModal
             <Form.Control
             className={`modal-form-input-${i}`}
             type="text"
-            defaultValue={currentUserObject[currentUser.uid] ? currentUserObject[currentUser.uid][element] : ''}
+            defaultValue={currentModalObject[currentUser.uid] ? currentModalObject[currentUser.uid][element] : ''}
             />
       
           </FloatingLabel>

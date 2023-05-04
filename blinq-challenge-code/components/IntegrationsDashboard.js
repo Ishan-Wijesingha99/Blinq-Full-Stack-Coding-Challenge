@@ -16,6 +16,7 @@ export default function IntegrationsDashboard() {
   
   const [currentModalObject, setCurrentModalObject] = useState({})
   const [currentIntegrationId, setCurrentIntegrationId] = useState('')
+  const [updatedIntegrationList, setUpdatedIntegrationList] = useState(false)
 
 
   const { currentUser } = useAuth()
@@ -47,6 +48,8 @@ export default function IntegrationsDashboard() {
         setCurrentIntegrationId={setCurrentIntegrationId}
         loginReminderModal={loginReminderModal}
         setLoginReminderModal={setLoginReminderModal}
+        updatedIntegrationList={updatedIntegrationList}
+        setUpdatedIntegrationList={setUpdatedIntegrationList}
       />
 
 
@@ -78,6 +81,8 @@ export default function IntegrationsDashboard() {
         <CustomIntegrationModal
         customIntegrationModal={customIntegrationModal}
         setCustomIntegrationModal={setCustomIntegrationModal}
+        updatedIntegrationList={updatedIntegrationList}
+        setUpdatedIntegrationList={setUpdatedIntegrationList}
         />
       )}
 
