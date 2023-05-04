@@ -16,6 +16,7 @@ export default function RegisterPage() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [passwordsNotMatching, setPasswordsNotMatching] = useState(false)
+  const [serverSideError, setServerSideError] = useState(null)
 
   const { currentUser, signup } = useAuth()
   console.log(currentUser)
@@ -36,7 +37,8 @@ export default function RegisterPage() {
       // then redirect them to integrations page "/"
       router.push('/')
     } catch (error) {
-      console.log(error)
+      // if email already exists in database
+      if(error.message === 'Firebase: Error (auth/email-already-in-use).') setServerSideError('Email already exists in our database')
     }
 
   }
@@ -128,8 +130,12 @@ export default function RegisterPage() {
             </Button>
 
             {errors.email && <p className='client-side-error'>- Email must be a valid email address</p>}
+            
             {errors.pword && <p className='client-side-error'>- Password must be at least 6 characters</p>}
+
             {passwordsNotMatching && <p className='client-side-error'>- Password and Confirm Password field must be identical</p>}
+
+            {(serverSideError === 'Email already exists in our database') && <p className='client-side-error'>- Email already exists in our database, use another email address</p>}
 
           </Form>
         )

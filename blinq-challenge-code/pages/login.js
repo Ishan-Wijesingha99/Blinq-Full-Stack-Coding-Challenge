@@ -14,9 +14,9 @@ import { useForm } from 'react-hook-form';
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [serverSideError, setServerSideError] = useState(null)
 
   const { currentUser, login } = useAuth()
-  console.log(currentUser)
 
   const router = useRouter()
 
@@ -33,9 +33,14 @@ export default function LoginPage() {
       // then redirect them to integrations page "/"
       router.push('/')
     } catch (error) {
-      console.log(error)
-    }
+      // if password is incorrect
+      if(error.message === 'Firebase: Error (auth/wrong-password).') setServerSideError('Incorrect password')
+
+      // if email does not exist in database
+      if(error.message === 'Firebase: Error (auth/user-not-found).') setServerSideError('Email not found in our database')
+      }
   }
+  
 
   
 
@@ -111,6 +116,11 @@ export default function LoginPage() {
 
             {errors.email && <p className='client-side-error'>- Email must be a valid email address</p>}
             {errors.pword && <p className='client-side-error'>- Password must be at least 6 characters</p>}
+
+            {(serverSideError === 'Incorrect password') && <p className='client-side-error'>- Incorrect password</p>}
+
+            {(serverSideError === 'Email not found in our database') && <p className='client-side-error'>- Email not found in our database</p>}
+
           </Form>
         )
       }
