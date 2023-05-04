@@ -63,6 +63,8 @@ export default function IntegrationsDashboard() {
         setCurrentModalObject={setCurrentModalObject}
         currentIntegrationId={currentIntegrationId}
         setCurrentIntegrationId={setCurrentIntegrationId}
+        updatedIntegrationList={updatedIntegrationList}
+        setUpdatedIntegrationList={setUpdatedIntegrationList}
         />
       )}
 

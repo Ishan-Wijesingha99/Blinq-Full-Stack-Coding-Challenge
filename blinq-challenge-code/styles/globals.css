@@ -281,9 +281,12 @@ a {
   border: 2px solid #f35a57;
 }
 
-.submit-form-error-msg {
-  color: #f35a57;
+.modal-error-msg {
   margin-top: 1rem;
+  color: #f35a57;
+  border: 2px solid #f35a57;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
 }
 
 .successful-modal {
