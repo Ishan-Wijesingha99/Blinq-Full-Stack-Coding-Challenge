@@ -12,7 +12,27 @@ export default function CustomIntegrationModal({ customIntegrationModal, setCust
 
   const { currentUser } = useAuth()
 
+  
+
+
+
   const addIntegration = () => {
+
+    // client-side validation, don't add integration if name already exists
+    let passedValidation = true;
+
+    document.querySelectorAll('.integration-title').forEach(htmlElement => {
+
+      if(htmlElement.innerHTML == document.querySelector('.integration-name-input').value) {
+        setErrorMessage('Integration with this name already exists')
+
+        passedValidation = false
+      }
+
+    })
+    if(!passedValidation) return
+
+
 
     let keysAndValues = {}
     let keys = []
@@ -34,7 +54,7 @@ export default function CustomIntegrationModal({ customIntegrationModal, setCust
 
     }
 
-    // client-side validation
+    // client-side validation, making sure fields aren't empty
     if(keys.includes('') || values.includes('') || document.querySelector('.integration-name-input').value == '') return setErrorMessage('Fields cannot be empty')
 
     const dbRef = collection(db, 'integrations')
@@ -163,6 +183,13 @@ export default function CustomIntegrationModal({ customIntegrationModal, setCust
                 Add Integration
               </button>
             )}
+
+            <button
+            className='custom-cancel-btn'
+            onClick={() => setCustomIntegrationModal(false)}
+            >
+              Cancel
+            </button>
 
             {(errorMessage !== '') && (
               <p className='client-side-error'>{errorMessage}</p>
