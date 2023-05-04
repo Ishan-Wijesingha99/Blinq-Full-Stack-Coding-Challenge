@@ -2,9 +2,9 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import appStoreImg from  '../public/app-store.webp';
-import goooglePlayImg from '../public/google-play.webp';
-import SOCImg from '../public/soc-2-certified.webp';
+import appStoreImg from  '../public/app-store.png';
+import goooglePlayImg from '../public/google-play.png';
+import SOCImg from '../public/soc-2-certified.png';
 import footerLogo from '../public/footer-logo.png';
 
 export default function Footer() {
@@ -70,6 +70,7 @@ export default function Footer() {
                 src={SOCImg}
                 width={130}
                 height={56}
+                style={{borderRadius: '0.375rem'}}
                 />
               </div>
             </a>
