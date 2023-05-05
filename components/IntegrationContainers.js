@@ -16,10 +16,8 @@ export default function IntegrationContainers({ setFormModal, setLoginReminderMo
     const getIntegrationData = async () => {
 
       // get allDocs from firestore
-      const snapshots = await getDocs(collection(db, 'integrations'));
-
-      console.log(snapshots)
-
+      const snapshots = await getDocs(collection(db, 'integrations'))
+      
       // need document ids for knowing which modal data to show
       const IdData = snapshots.docs.map(object => object.id);
       setCollectionIdArray(IdData);
